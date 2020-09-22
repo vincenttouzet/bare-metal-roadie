@@ -1,0 +1,5 @@
+---
+- name: Machine provisioning
+  hosts: localhost
+  roles:
+    - git

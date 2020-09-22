@@ -1,0 +1,4 @@
+- apt:
+    become: true
+    name: git
+    state: latest

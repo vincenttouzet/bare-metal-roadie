@@ -1,0 +1,102 @@
+# System dependant tasks
+- name: Install Git
+  import_tasks: debian.yml
+  when: ansible_facts['os_family'] == 'Debian'
+- import_tasks: archlinux.yml
+  when: ansible_facts['os_family'] == 'Archlinux'
+# Common tasks
+# configure .gitconfig file
+# core.autocrlf
+- name: Configure ~/.gitconfig
+  ini_file:
+    create: true
+    path: ~/.gitconfig
+    section: core
+    option: autocrlf
+    value: true
+# core.pager
+- ini_file:
+    path: ~/.gitconfig
+    section: core
+    option: pager
+    value: less
+# color.diff
+- ini_file:
+    path: ~/.gitconfig
+    section: color
+    option: diff
+    value: auto
+# color.status
+- ini_file:
+    path: ~/.gitconfig
+    section: color
+    option: status
+    value: auto
+# color.branch
+- ini_file:
+    path: ~/.gitconfig
+    section: color
+    option: branch
+    value: auto
+# alias.ci
+- ini_file:
+    path: ~/.gitconfig
+    section: alias
+    option: ci
+    value: commit
+# alias.co      
+- ini_file:
+    path: ~/.gitconfig
+    section: alias
+    option: co
+    value: checkout
+# alias.st      
+- ini_file:
+    path: ~/.gitconfig
+    section: alias
+    option: st
+    value: status
+# alias.br
+- ini_file:
+    path: ~/.gitconfig
+    section: alias
+    option: br
+    value: branch
+# alias.spull 
+- ini_file:
+    path: ~/.gitconfig
+    section: alias
+    option: spull
+    value: ! git stash && git pull && git stash pop
+# alias.oops
+- ini_file:
+    path: ~/.gitconfig
+    section: alias
+    option: oops
+    value: commit --amend --no-edit
+# alias.lg
+- ini_file:
+    path: ~/.gitconfig
+    section: alias
+    option: lg
+    value: log --graph --date=relative --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ad)%Creset' 
+# pull.rebase
+- ini_file:
+    path: ~/.gitconfig
+    section: pull
+    option: rebase
+    value: preserve
+# push.default
+- ini_file:
+    path: ~/.gitconfig
+    section: push
+    option: default
+    value: upstream
+# tag.sort
+- ini_file:
+    path: ~/.gitconfig
+    section: tag
+    option: sort
+    value: version:refname
+
+
