@@ -1,0 +1,61 @@
+- name: Check Oh My Zsh installation
+  stat: 
+    path: ~/.oh-my-zsh
+  register: ohmyzsh_installed
+- name: Install Oh my Zsh
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  when: ohmyzsh_installed.stat.exists == false
+# todo ensure the current sh IS zsh
+- name: Change user default shell
+  become: yes
+  user:
+    name: "{{ ansible_user }}"
+    shell: /usr/bin/zsh
+# Recommended Fonts for p10k
+- name: Install MesloLGS NF fonts
+  become: true
+  block:
+    - name: Install Regular font
+      get_url:
+        dest: /usr/share/fonts/TTF/MesloLGS-NF-Regular.ttf
+        url: https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+    - name: Install Bold font
+      get_url:
+        dest: /usr/share/fonts/TTF/MesloLGS-NF-Bold.ttf
+        url: https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+    - name: Install Italic font
+      get_url:
+        dest: /usr/share/fonts/TTF/MesloLGS-NF-Italic.ttf
+        url: https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+    - name: Install Bold Italic font
+      get_url:
+        dest: /usr/share/fonts/TTF/MesloLGS-NF-Bold-Italic.ttf
+        url: https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+# Powerlevel10k
+- name: Check Powerlevel10k installation
+  stat:
+    path: ~/.oh-my-zsh/custom/themes/powerlevel10k
+  register: powerlevel10k_installed
+- name: Install Powerlevel10k theme
+  shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
+  when: powerlevel10k_installed.stat.exists == false
+# Powerlevel10k configuration
+- name: Setup Powerlevel10k configuration
+  copy:
+    src: files/.p10k.zsh
+    dest: ~/.p10k.zsh
+    force: false
+# load p10k configuration
+- name: Load p10k configuration
+  blockinfile:
+    path: ~/.zshrc
+    block: |
+      # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Set oh my zsh default theme
+- name: Set Powerlevel10 as the default theme
+  replace:
+    path: ~/.zshrc
+    regexp: ^ZSH_THEME=.*$
+    replace: ZSH_THEME="powerlevel10k/powerlevel10k"
+
