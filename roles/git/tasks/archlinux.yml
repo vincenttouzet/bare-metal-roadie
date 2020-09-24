@@ -1,4 +1,3 @@
 - pacman:
-    become: true
     name: git
     state: latest

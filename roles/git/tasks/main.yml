@@ -19,7 +19,7 @@
     path: ~/.gitconfig
     section: core
     option: pager
-    value: less
+    value: more
 # color.diff
 - ini_file:
     path: ~/.gitconfig
@@ -67,7 +67,7 @@
     path: ~/.gitconfig
     section: alias
     option: spull
-    value: ! git stash && git pull && git stash pop
+    value: "!git stash && git pull && git stash pop"
 # alias.oops
 - ini_file:
     path: ~/.gitconfig
