@@ -1,0 +1,9 @@
+# Install zsh
+- name: Installing Zsh
+  become: true
+  apt:
+    name: 
+      - zsh 
+      - curl
+    update_cache: yes
+    state: present

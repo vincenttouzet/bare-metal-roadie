@@ -1,0 +1,23 @@
+---
+- name: Install Bare Metal Roadie
+  hosts: localhost
+  vars:
+    version: master
+  tasks:
+    - name: Git install (Debian based)
+      become: true
+      when: ansible_facts['os_family'] == 'Debian'
+      apt:
+        name: git
+        state: present
+    - name: Git install (Archlinux base)
+      become: true
+      when: ansible_facts['os_family'] == 'Archlinux'
+      pacman:
+        name: git
+        state: present
+    - name: Bare Metal Roadie install
+      git:
+        repo: https://github.com/vincenttouzet/bare-metal-roadie
+        dest: ~/.bare-metal-roadie
+        version: "{{ version }}"
