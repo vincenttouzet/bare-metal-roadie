@@ -1,3 +1,4 @@
-- pacman:
+- become: true
+  pacman:
     name: git
     state: latest
