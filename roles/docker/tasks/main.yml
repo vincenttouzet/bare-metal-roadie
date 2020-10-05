@@ -1,0 +1,15 @@
+---
+# System dependant tasks
+- name: Install Git
+  import_tasks: debian.yml
+  when: ansible_facts['os_family'] == 'Debian'
+- import_tasks: archlinux.yml
+  when: ansible_facts['os_family'] == 'Archlinux'
+
+# todo set user to be in the docker group
+- name: Add user to Docker group
+  become: yes
+  user:
+    name: '{{ ansible_user }}'
+    append: true
+    groups: docker
