@@ -26,7 +26,7 @@ echo "OK"
 echo -n "Checking pip ... "
 PIP_BIN=$(which pip)
 if [ ! $? -eq 0 ]; then
-    PIP_BIN=$(which pip)
+    PIP_BIN=$(which pip3)
     if [ ! $? -eq 0 ]; then
         # check for pip3
         echo "KO"
@@ -66,6 +66,7 @@ fi
 echo "OK"
 rm /tmp/bare-metal-roadie-install.yml
 
-echo "Running Bare metal roadie"
 cd ~/.bare-metal-roadie
-$ANSIBLE_PLAYBOOK_BIN --ask-become-pass playbook.yml
+
+echo "Running Bare metal roadie !"
+ansible-playbook --ask-become-pass playbook.yml

@@ -34,4 +34,5 @@ curl -sS https://raw.githubusercontent.com/vincenttouzet/bare-metal-roadie/maste
 ## Roles
 
 * [Git](roles/git/README.md)
-* [OhMtZSH](roles/ohmyzsh/README.md)
+* [OhMyZSH](roles/ohmyzsh/README.md)
+* [Docker](roles/docker/README.md)

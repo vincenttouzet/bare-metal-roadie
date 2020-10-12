@@ -1,0 +1,11 @@
+- name: Install Docker
+  pacman:
+    name:
+      - docker
+      - containerd
+    state: latest
+  become: yes
+
+- name: Install Docker compose
+  become: true
+  shell: pip install docker-compose
