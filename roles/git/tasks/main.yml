@@ -13,7 +13,7 @@
     path: ~/.gitconfig
     section: core
     option: autocrlf
-    value: "true"
+    value: "input"
 # core.pager
 - name: core.pager
   ini_file:
