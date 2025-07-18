@@ -46,5 +46,3 @@
     state: present
   become: yes
 
-- name: Install Docker compose
-  shell: pip3 install docker-compose
