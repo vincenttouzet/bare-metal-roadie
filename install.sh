@@ -69,4 +69,4 @@ rm /tmp/bare-metal-roadie-install.yml
 cd ~/.bare-metal-roadie
 
 echo "Running Bare metal roadie !"
-ansible-playbook --ask-become-pass playbook.yml
+ansible-playbook --ask-become-pass -e "ansible_user=`whoami`" playbook.yml
