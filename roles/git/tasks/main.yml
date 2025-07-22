@@ -105,6 +105,13 @@
     section: push
     option: default
     value: upstream
+# push.default
+- name: push.autoSetupRemote
+  ini_file:
+    path: ~/.gitconfig
+    section: push
+    option: autoSetupRemote
+    value: true
 # tag.sort
 - name: tag.sort
   ini_file:
